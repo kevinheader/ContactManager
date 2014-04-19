@@ -86,4 +86,5 @@
     
     XCTAssertEqual((NSUInteger)0, contactCount, @"Did not delete contact");
 }
+
 @end

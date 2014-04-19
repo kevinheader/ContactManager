@@ -21,6 +21,8 @@
 		DE27DD8F13B7B40A00EF7A92 /* ContactDataControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE27DD8E13B7B40A00EF7A92 /* ContactDataControllerTests.m */; };
 		DE27DD9513B7CB7900EF7A92 /* ContactDataControllerKVOTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE27DD9213B7C5E800EF7A92 /* ContactDataControllerKVOTests.m */; };
 		DE2ABFBE13BAD23D005E99D9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DE2ABFBD13BAD23D005E99D9 /* Localizable.strings */; };
+		DE3F171D18FB88C200353FCF /* ContactDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3F171C18FB88C200353FCF /* ContactDetailViewModel.m */; };
+		DE3F171F18FB894600353FCF /* ContactDetailViewModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3F171E18FB894600353FCF /* ContactDetailViewModelTests.m */; };
 		DE43870C16911FB900D01103 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE43870B16911FB900D01103 /* OCMock.framework */; };
 		DE78DB3713B7EB96002E0F97 /* BaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = DE78DB3613B7EB96002E0F97 /* BaseTestCase.m */; };
 		DE78DB3D13B7EF7F002E0F97 /* MainWindowControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE78DB3C13B7EF7F002E0F97 /* MainWindowControllerTests.m */; };
@@ -39,6 +41,7 @@
 		DED817B313A452AA00EC3234 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DED817B113A452AA00EC3234 /* InfoPlist.strings */; };
 		DEF0BEF713B1A32600E76C47 /* ContactDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BEF613B1A32600E76C47 /* ContactDataController.m */; };
 		DEF0BF1613B1A58C00E76C47 /* NSManagedObjectModel+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BF1513B1A58C00E76C47 /* NSManagedObjectModel+Extensions.m */; };
+		FF5EB4457CE548708197B0B0 /* libPods-ContactManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4791A2EE1B04FC18718FF1C /* libPods-ContactManager.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B397FBF2B1D046368395469A /* Pods-ContactManager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContactManager.xcconfig"; path = "Pods/Pods-ContactManager.xcconfig"; sourceTree = "<group>"; };
 		DE0285BD13B17CB20069A885 /* ContactManagerModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ContactManagerModel.xcdatamodel; sourceTree = "<group>"; };
 		DE0285BF13B18B760069A885 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
 		DE0285C013B18B760069A885 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
@@ -85,6 +89,9 @@
 		DE27DD8E13B7B40A00EF7A92 /* ContactDataControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDataControllerTests.m; sourceTree = "<group>"; };
 		DE27DD9213B7C5E800EF7A92 /* ContactDataControllerKVOTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDataControllerKVOTests.m; sourceTree = "<group>"; };
 		DE2ABFBD13BAD23D005E99D9 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		DE3F171B18FB88C200353FCF /* ContactDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDetailViewModel.h; sourceTree = "<group>"; };
+		DE3F171C18FB88C200353FCF /* ContactDetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDetailViewModel.m; sourceTree = "<group>"; };
+		DE3F171E18FB894600353FCF /* ContactDetailViewModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDetailViewModelTests.m; sourceTree = "<group>"; };
 		DE43870B16911FB900D01103 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
 		DE78DB3513B7EB96002E0F97 /* BaseTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTestCase.h; sourceTree = "<group>"; };
 		DE78DB3613B7EB96002E0F97 /* BaseTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTestCase.m; sourceTree = "<group>"; };
@@ -115,6 +122,7 @@
 		DEF0BEF613B1A32600E76C47 /* ContactDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDataController.m; sourceTree = "<group>"; };
 		DEF0BF1413B1A58C00E76C47 /* NSManagedObjectModel+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectModel+Extensions.h"; sourceTree = "<group>"; };
 		DEF0BF1513B1A58C00E76C47 /* NSManagedObjectModel+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectModel+Extensions.m"; sourceTree = "<group>"; };
+		E4791A2EE1B04FC18718FF1C /* libPods-ContactManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ContactManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +131,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DED8178E13A452A900EC3234 /* Cocoa.framework in Frameworks */,
+				FF5EB4457CE548708197B0B0 /* libPods-ContactManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +163,7 @@
 				DE18F25513B99D2700B4B76E /* ContactDetailViewControllerTests.m */,
 				DE18F25113B98C6C00B4B76E /* ContactListViewControllerKVOTests.m */,
 				DE0E381A13B8386A0017EA58 /* ContactListViewControllerTests.m */,
+				DE3F171E18FB894600353FCF /* ContactDetailViewModelTests.m */,
 			);
 			name = "View Controller Tests";
 			sourceTree = "<group>";
@@ -164,6 +174,8 @@
 				DEB4C38F13B058E800B84FA9 /* ContactDetailViewController.h */,
 				DEB4C39013B058E800B84FA9 /* ContactDetailViewController.m */,
 				DEB4C39113B058E800B84FA9 /* ContactDetailViewController.xib */,
+				DE3F171B18FB88C200353FCF /* ContactDetailViewModel.h */,
+				DE3F171C18FB88C200353FCF /* ContactDetailViewModel.m */,
 				DE25CA6A13A8560E00D71422 /* ContactListViewController.h */,
 				DE25CA6B13A8560E00D71422 /* ContactListViewController.m */,
 				DE25CA6C13A8560E00D71422 /* ContactListViewController.xib */,
@@ -228,6 +240,7 @@
 				DED817AE13A452AA00EC3234 /* ContactManagerTests */,
 				DED8178C13A452A900EC3234 /* Frameworks */,
 				DED8178A13A452A900EC3234 /* Products */,
+				B397FBF2B1D046368395469A /* Pods-ContactManager.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -245,6 +258,7 @@
 			children = (
 				DED8178D13A452A900EC3234 /* Cocoa.framework */,
 				DED8178F13A452A900EC3234 /* Other Frameworks */,
+				E4791A2EE1B04FC18718FF1C /* libPods-ContactManager.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -337,10 +351,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DED817BB13A452AA00EC3234 /* Build configuration list for PBXNativeTarget "ContactManager" */;
 			buildPhases = (
+				469F1675D00C4FC38D119D2E /* Check Pods Manifest.lock */,
 				DED8178513A452A900EC3234 /* Sources */,
 				DED8178613A452A900EC3234 /* Frameworks */,
 				DED8178713A452A900EC3234 /* Resources */,
 				DEB2512B1691FAE60007F916 /* ShellScript */,
+				4D8985F745594B50B56C2A1A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -425,6 +441,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		469F1675D00C4FC38D119D2E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4D8985F745594B50B56C2A1A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-ContactManager-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DEB2512B1691FAE60007F916 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -465,6 +511,7 @@
 				DEB4C39213B058E800B84FA9 /* ContactDetailViewController.m in Sources */,
 				DE0285BE13B17CB20069A885 /* ContactManagerModel.xcdatamodeld in Sources */,
 				DE0285C113B18B760069A885 /* Contact.m in Sources */,
+				DE3F171D18FB88C200353FCF /* ContactDetailViewModel.m in Sources */,
 				DE0285C413B18C000069A885 /* CoreDataController.m in Sources */,
 				DEF0BEF713B1A32600E76C47 /* ContactDataController.m in Sources */,
 				DEF0BF1613B1A58C00E76C47 /* NSManagedObjectModel+Extensions.m in Sources */,
@@ -477,6 +524,7 @@
 			files = (
 				DE27DD9513B7CB7900EF7A92 /* ContactDataControllerKVOTests.m in Sources */,
 				DE27DD8F13B7B40A00EF7A92 /* ContactDataControllerTests.m in Sources */,
+				DE3F171F18FB894600353FCF /* ContactDetailViewModelTests.m in Sources */,
 				DE78DB3713B7EB96002E0F97 /* BaseTestCase.m in Sources */,
 				DE78DB3D13B7EF7F002E0F97 /* MainWindowControllerTests.m in Sources */,
 				DE0E381B13B8386A0017EA58 /* ContactListViewControllerTests.m in Sources */,
@@ -546,7 +594,10 @@
 				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -585,6 +636,7 @@
 		};
 		DED817BC13A452AA00EC3234 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B397FBF2B1D046368395469A /* Pods-ContactManager.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -597,11 +649,14 @@
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ContactManager/ContactManager-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "ContactManager/ContactManager-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
@@ -610,6 +665,7 @@
 		};
 		DED817BD13A452AA00EC3234 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B397FBF2B1D046368395469A /* Pods-ContactManager.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -625,7 +681,7 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "ContactManager/ContactManager-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
@@ -648,7 +704,10 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ContactManagerTests/ContactManagerTests-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ContactManagerTests/ContactManagerTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
