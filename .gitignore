@@ -1,36 +1,25 @@
-# Ignore the Mac OS X .DS_Store files
+# Xcode
 .DS_Store
-
-# User-specific settings
-!default.mode1v3
-*.mode1v3
-!default.mode2v3
-*.mode2v3
-!default.pbxuser
+*/build/*
 *.pbxuser
-!default.perspectivev3
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
 *.perspectivev3
-!default.xcworkspace
-*.xcworkspace
+!default.perspectivev3
 xcuserdata
+profile
+*.moved-aside
+DerivedData
+.idea/
+*.hmap
+*.xccheckout
 
-# Ignore textmate build errors
-*.tm_build_errors
-
-# Ignore temp nibs and swap files
-*.swp
-*~.nib
-
-# Ignore the build, since we don't want archived builds
-build
-
-# Probably don't want to check in xcuserdata
-xcuserdata/
-*.xcworkspace/
+# CocoaPods
+Pods
 
 # Other
-Documentation
-DerivedData
-ocunit.xml
 lcov-*
 .idea
