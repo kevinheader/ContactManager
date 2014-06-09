@@ -8,23 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class ContactDataController;
-@class ContactListViewController;
-@class ContactDetailViewController;
+@class ContactManagerViewModel;
 
 @interface MainWindowController : NSWindowController
 
-@property (nonatomic, assign) IBOutlet NSView *listView;
-@property (nonatomic, assign) IBOutlet NSView *detailView;
-@property (nonatomic, assign) IBOutlet NSButton *removeButton;
-@property (nonatomic, assign) IBOutlet NSButton *addButton;
-
-@property (nonatomic, strong) ContactListViewController *contactListViewController;
-@property (nonatomic, strong) ContactDetailViewController *contactDetailViewController;
-
-- (id)initWithContactDataController:(ContactDataController *)controller;
-
-- (IBAction)newContact:(id)sender;
-- (IBAction)deleteContact:(id)sender;
+- (instancetype)initWithContactManagerViewModel:(ContactManagerViewModel *)viewModel;
 
 @end

@@ -6,13 +6,23 @@
 //  Copyright 2011 Scott Densmore. All rights reserved.
 //
 
+#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveCocoa/RACEXTScope.h>
+
 #import "ContactListViewController.h"
+
+#import "ContactManagerViewModel.h"
+
 #import "ContactDataController.h"
+
 #import "Contact.h"
 
 @interface ContactListViewController()
 
-@property (strong) ContactDataController *contactController;
+@property (nonatomic, assign) IBOutlet NSArrayController *contactsArrayController;
+@property (nonatomic, assign) IBOutlet NSTableView *tableView;
+
+@property (nonatomic, weak) ContactManagerViewModel *viewModel;
 
 @end
 
@@ -20,18 +30,16 @@
 
 #pragma mark - Memory Management
 
-- (id)init 
-{
-    return [self initWithContactDataController:nil];
+- (instancetype)init {
+    return [self initWithContactManagerViewModel:nil];
 }
 
-- (id)initWithContactDataController:(ContactDataController *)controller 
-{
-    NSParameterAssert(controller != nil);
+- (instancetype)initWithContactManagerViewModel:(ContactManagerViewModel *)viewModel {
+    NSParameterAssert(viewModel != nil);
     
     self = [super init];
     if (self) {
-        _contactController = controller;
+        self.viewModel = viewModel;
     }
     return self;
 }
@@ -39,55 +47,35 @@
 
 #pragma mark - Accessors
 
-- (NSArray *)contacts
-{
-    return [_contactController contacts];
-}
-
-#pragma mark - Methods
-
-- (Contact *)selectedContact
-{
-	if ([[_contactsArrayController selectedObjects] count]) {
-		return [_contactsArrayController selectedObjects][0];
-	}
-	return nil;
-}
-
-- (void)selectContact:(Contact *)contact
-{
-    BOOL valueChanged;
-    if (contact) {
-        valueChanged = [_contactsArrayController setSelectedObjects:@[contact]];
-    } else {
-        valueChanged = [_contactsArrayController setSelectedObjects:nil];
-    }
-    
-    if (valueChanged) {
-        [self willChangeValueForKey:@"selectedContact"];
-        [self didChangeValueForKey:@"selectedContact"];
-    }
-}
-
-- (void)reloadData 
-{
-	[self willChangeValueForKey:@"contacts"];
-	[self didChangeValueForKey:@"contacts"];
+- (NSArray *)contacts {
+    return self.viewModel.contacts;
 }
 
 #pragma mark - View methods
 
-- (NSString *)nibName
-{
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    if (self.contactsArrayController.selectedObjects.count) {
+        [self.viewModel selectContactViewModelForIndex:self.contactsArrayController.selectionIndex];
+    }
+    
+    @weakify(self);
+    [self.viewModel.updatedContentSignal subscribeNext:^(id x) {
+        @strongify(self);
+        [self willChangeValueForKey:@"contacts"];
+        [self didChangeValueForKey:@"contacts"];
+        //[self.viewModel selectContactViewModelForIndex:self.contactsArrayController.selectionIndex];
+    }];
+}
+
+- (NSString *)nibName {
     return NSStringFromClass([self class]);
 }
 
 #pragma mark - NSTableViewDelegate methods
 
-- (void)tableViewSelectionDidChange:(NSNotification *)aNotification 
-{
-	[self willChangeValueForKey:@"selectedContact"];
-	[self didChangeValueForKey:@"selectedContact"];
+- (void)tableViewSelectionDidChange:(NSNotification *)aNotification  {
+    [self.viewModel selectContactViewModelForIndex:self.contactsArrayController.selectionIndex];
 }
 
 @end

@@ -15,7 +15,7 @@
 
 @property (nonatomic, readonly, strong) NSArray *contacts;
 
-- (id)initWithCoreDataController:(CoreDataController *)controller;
+- (instancetype)initWithCoreDataController:(CoreDataController *)coreDataController;
 
 - (Contact *)createContact;
 - (void)deleteContact:(Contact *)contact;

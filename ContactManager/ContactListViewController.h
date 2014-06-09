@@ -8,19 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class ContactDataController;
-@class Contact;
+@class ContactManagerViewModel;
 
 @interface ContactListViewController : NSViewController <NSTableViewDelegate>
 
-@property (nonatomic, assign) IBOutlet NSArrayController *contactsArrayController;
-@property (nonatomic, assign) IBOutlet NSTableView *tableView;
 @property (nonatomic, readonly, assign) NSArray *contacts;
 
-- (id)initWithContactDataController:(ContactDataController *)controller;
-
-- (Contact *)selectedContact;
-- (void)selectContact:(Contact *)contact;
-- (void)reloadData;
+- (id)initWithContactManagerViewModel:(ContactManagerViewModel *)viewModel;
 
 @end

@@ -13,41 +13,35 @@
 
 @interface ContactDataController()
 
-@property (nonatomic, strong) CoreDataController *coreDataController;
+@property (nonatomic, weak) CoreDataController *coreDataController;
 @property (nonatomic, readwrite, strong) NSArray *contacts;
 
 @end
 
 @implementation ContactDataController
 
-#pragma mark - Memory Managements
 
-- (id)init 
-{
+- (instancetype)init {
     return [self initWithCoreDataController:nil];
 }
 
-- (id)initWithCoreDataController:(CoreDataController *)controller
-{
-    NSParameterAssert(controller != nil);
+- (instancetype)initWithCoreDataController:(CoreDataController *)coreDataController {
+    NSParameterAssert(coreDataController != nil);
     
     self = [super init];
     if (self) {
-        if (controller) {
-            _coreDataController = controller;
+        if (coreDataController) {
+            self.coreDataController = coreDataController;
         }
     }
     
     return self;
 }
 
-
-
 #pragma mark - Accessors
 
-- (NSArray *)contacts
-{
-    return [_coreDataController.managedObjectModel objectsInEntityWithContext:_coreDataController.managedObjectContext
+- (NSArray *)contacts {
+    return [self.coreDataController.managedObjectModel objectsInEntityWithContext:_coreDataController.managedObjectContext
                                                                         name:@"Contact" 
                                                                    predicate:nil 
                                                        sortedWithDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES]]];
@@ -55,8 +49,7 @@
 
 #pragma mark - Data Methods
 
-- (Contact *)createContact
-{
+- (Contact *)createContact {
     [self willChangeValueForKey:@"contacts"];
 	Contact *contact = (Contact *)[_coreDataController.managedObjectModel insertNewObjectInEntityWithContext:_coreDataController.managedObjectContext
                                                                                               name:@"Contact" 
@@ -66,10 +59,9 @@
 	return contact;
 }
 
-- (void)deleteContact:(Contact *)contact
-{
+- (void)deleteContact:(Contact *)contact {
     [self willChangeValueForKey:@"contacts"];
-	[_coreDataController.managedObjectContext deleteObject:contact];
+	[self.coreDataController.managedObjectContext deleteObject:contact];
 	[self didChangeValueForKey:@"contacts"];
 }
 

@@ -11,11 +11,14 @@
 #import "CoreDataController.h"
 #import "ContactDataController.h"
 
+#import "ContactManagerViewModel.h"
+
 @interface ContactManagerAppDelegate()
 
-@property (strong) MainWindowController *mainWindowController;
-@property (strong) CoreDataController *coreDataController;
-@property (strong) ContactDataController *contactDataController;
+@property (nonatomic, strong) MainWindowController *mainWindowController;
+@property (nonatomic, strong) CoreDataController *coreDataController;
+@property (nonatomic, strong) ContactDataController *contactDataController;
+@property (nonatomic, strong) ContactManagerViewModel *viewModel;
 
 - (void)showMainWindow;
 
@@ -29,9 +32,10 @@
 {
     self = [super init];
     if (self) {
-        _coreDataController = [[CoreDataController alloc] initWithInitialType:NSSQLiteStoreType modelName:@"ContactManagerModel.momd" applicationSupportName:@"ContactManager" dataStoreName:@"ContactManager.sql"];
-        _contactDataController = [[ContactDataController alloc] initWithCoreDataController:_coreDataController];
-        _mainWindowController = [[MainWindowController alloc] initWithContactDataController:_contactDataController];
+        self.coreDataController = [[CoreDataController alloc] initWithInitialType:NSSQLiteStoreType modelName:@"ContactManagerModel.momd" applicationSupportName:@"ContactManager" dataStoreName:@"ContactManager.sql"];
+        self.contactDataController = [[ContactDataController alloc] initWithCoreDataController:self.coreDataController];
+        self.viewModel = [[ContactManagerViewModel alloc] initWithContactDataController:self.contactDataController];
+        self.mainWindowController = [[MainWindowController alloc] initWithContactManagerViewModel:self.viewModel];
     }
     return self;
 }

@@ -8,16 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class Contact;
+//@class Contact;
+@class ContactViewModel;
+@class ContactManagerViewModel;
 
 @interface ContactDetailViewController : NSViewController 
 
-@property (nonatomic, assign) IBOutlet NSTextField *firstNameTextField;
-@property (nonatomic, assign) IBOutlet NSTextField *lastNameTextField;
-@property (nonatomic, assign) IBOutlet NSTextField *emailTextField;
-@property (nonatomic, assign) IBOutlet NSTextField *phoneNumberTextField;
-@property (nonatomic, assign) IBOutlet NSObjectController *contactObjectController;
+@property (nonatomic, strong) ContactViewModel *contact;
 
-@property (nonatomic, strong) Contact *contact;
+- (instancetype)initWithContactManagerViewModel:(ContactManagerViewModel *)viewModel;
 
 @end

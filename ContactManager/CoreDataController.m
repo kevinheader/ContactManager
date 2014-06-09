@@ -25,53 +25,45 @@
 
 @synthesize delegate;
 
-#pragma mark - Memory Management
-
-- (id)init 
-{
+- (instancetype)init {
     return [self initWithInitialType:NSInMemoryStoreType modelName:nil applicationSupportName:nil dataStoreName:nil];
 }
 
-- (id)initWithModelName:(NSString *)theModelName applicationSupportName:(NSString *)theApplicationSupportName dataStoreName:(NSString *)theDataStoreName
-{
-    return [self initWithInitialType:NSXMLStoreType modelName:theModelName applicationSupportName:theApplicationSupportName  dataStoreName:theDataStoreName];
+- (instancetype)initWithModelName:(NSString *)modelName applicationSupportName:(NSString *)applicationSupportName dataStoreName:(NSString *)dataStoreName {
+    return [self initWithInitialType:NSXMLStoreType modelName:modelName applicationSupportName:applicationSupportName  dataStoreName:dataStoreName];
 }
 
-- (id)initWithInitialType:(NSString *)type modelName:(NSString *)theModelName applicationSupportName:(NSString *)theApplicationSupportName dataStoreName:(NSString *)theDataStoreName;
-{
-    NSParameterAssert(theModelName != nil);
+- (id)initWithInitialType:(NSString *)initialType modelName:(NSString *)modelName applicationSupportName:(NSString *)applicationSupportName dataStoreName:(NSString *)dataStoreName {
+    NSParameterAssert(modelName != nil);
     
     self = [super init];
 	if (self) {
-		_initialType = type;
-        _modelName = theModelName;
+		_initialType = initialType;
+        _modelName = modelName;
         if (![_initialType isEqualToString:NSInMemoryStoreType]) {
-            NSParameterAssert(theApplicationSupportName != nil);
-            NSParameterAssert(theDataStoreName != nil);
-            _appSupportName = theApplicationSupportName;
-            _dataStoreName = theDataStoreName;
+            NSParameterAssert(applicationSupportName != nil);
+            NSParameterAssert(dataStoreName != nil);
+            _appSupportName = applicationSupportName;
+            _dataStoreName = dataStoreName;
         }
 	}
 	return self;
 }
 
-- (void)dealloc 
-{
+- (void)dealloc  {
     delegate = nil;
     
 }
 
 #pragma mark - Accesssors
 
-- (NSString *)applicationSupportFolder 
-{
+- (NSString *)applicationSupportFolder {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     NSString *basePath = ([paths count] > 0) ? paths[0] : NSTemporaryDirectory();
 	return [basePath stringByAppendingPathComponent:_appSupportName];
 }
 
-- (NSManagedObjectModel *)managedObjectModel 
-{
+- (NSManagedObjectModel *)managedObjectModel {
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
@@ -81,8 +73,7 @@
     return _managedObjectModel;
 }
 
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator 
-{
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
     if (_persistentStoreCoordinator != nil) {
         return _persistentStoreCoordinator;
     }
@@ -122,8 +113,7 @@
     return _persistentStoreCoordinator;
 }
 
-- (NSManagedObjectContext *)managedObjectContext
-{
+- (NSManagedObjectContext *)managedObjectContext {
     if (!_managedObjectContext) {
 		NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
 		if (coordinator != nil) {
@@ -135,8 +125,7 @@
     return _managedObjectContext;
 }
 
-- (BOOL)save:(NSError **)error
-{
+- (BOOL)save:(NSError **)error {
     BOOL reply = YES;
 	NSManagedObjectContext *moc = [self managedObjectContext];
 	if (moc != nil) {

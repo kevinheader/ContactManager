@@ -20,8 +20,8 @@
 @property (nonatomic, readonly, strong) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, readonly, strong) NSManagedObjectContext *managedObjectContext;
 
-- (id)initWithModelName:(NSString *)theModelName applicationSupportName:(NSString *)theApplicationSupportName dataStoreName:(NSString *)theDataStoreName;
-- (id)initWithInitialType:(NSString *)type modelName:(NSString *)theModelName applicationSupportName:(NSString *)theApplicationSupportName dataStoreName:(NSString *)theDataStoreName;
+- (instancetype)initWithModelName:(NSString *)modelName applicationSupportName:(NSString *)applicationSupportName dataStoreName:(NSString *)dataStoreName;
+- (instancetype)initWithInitialType:(NSString *)initialType modelName:(NSString *)modelName applicationSupportName:(NSString *)applicationSupportName dataStoreName:(NSString *)dataStoreName;
 
 - (BOOL)save:(NSError **)error;
 

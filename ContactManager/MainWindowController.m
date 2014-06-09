@@ -6,90 +6,67 @@
 //  Copyright 2011 Scott Densmore. All rights reserved.
 //
 
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
 #import "MainWindowController.h"
-#import "ContactDataController.h"
 #import "ContactListViewController.h"
 #import "ContactDetailViewController.h"
 
+#import "ContactManagerViewModel.h"
+
+#import "ContactDataController.h"
+
 @interface MainWindowController()
 
-@property (nonatomic, strong) ContactDataController *contactDataController;
+@property (nonatomic, assign) IBOutlet NSView *listView;
+@property (nonatomic, assign) IBOutlet NSView *detailView;
+@property (nonatomic, assign) IBOutlet NSButton *removeButton;
+@property (nonatomic, assign) IBOutlet NSButton *addButton;
+
+@property (nonatomic, strong) ContactListViewController *contactListViewController;
+@property (nonatomic, strong) ContactDetailViewController *contactDetailViewController;
+
+@property (nonatomic, weak) ContactManagerViewModel *viewModel;
 
 @end
 
 @implementation MainWindowController
 
 
-#pragma mark - Memory Management
-
-- (id)init
-{
-    return [self initWithContactDataController:nil];
+- (instancetype)init {
+    return [self initWithContactManagerViewModel:nil];
 }
 
-- (id)initWithContactDataController:(ContactDataController *)controller
-{
-    NSParameterAssert(controller != nil);
+- (instancetype)initWithContactManagerViewModel:(ContactManagerViewModel *)viewModel {
+    NSParameterAssert(viewModel != nil);
     
     self = [super initWithWindowNibName:@"MainWindowController"];
     if (self) {
-        _contactDataController = controller;
-        _contactListViewController = [[ContactListViewController alloc] initWithContactDataController:_contactDataController];
-        _contactDetailViewController = [[ContactDetailViewController alloc] init];
-        [_contactListViewController addObserver:self forKeyPath:@"selectedContact" options:NSKeyValueObservingOptionNew context:NULL];
+        self.viewModel = viewModel;
+        self.contactListViewController = [[ContactListViewController alloc] initWithContactManagerViewModel:self.viewModel];
+        self.contactDetailViewController = [[ContactDetailViewController alloc] initWithContactManagerViewModel:self.viewModel];
     }
     return self;
 }
 
-
-- (void)dealloc
-{
-    [_contactListViewController removeObserver:self forKeyPath:@"selectedContact"];
-}
-
 #pragma mark - Windows methods
 
-- (void)windowDidLoad
-{
+- (void)windowDidLoad {
     [super windowDidLoad];
     
-    [[_contactListViewController view] setFrame:[_listView bounds]];
-    [_listView addSubview:[_contactListViewController view]];
+    // setup detail first so we get the right notifications
+    self.contactDetailViewController.view.frame = self.detailView.bounds;
+    [self.detailView addSubview:self.contactDetailViewController.view];
     
-    [[_contactDetailViewController view] setFrame:[_detailView bounds]];
-    [_detailView addSubview:[_contactDetailViewController view]];
-    [_contactDetailViewController setContact:[_contactListViewController selectedContact]];
+    self.contactListViewController.view.frame = self.listView.bounds;
+    [self.listView addSubview:self.contactListViewController.view];
+    
+    self.addButton.rac_command = self.viewModel.addContactCommand;
+    self.removeButton.rac_command = self.viewModel.deleteContactCommand;
 }
 
-- (NSString *)windowNibName 
-{
+- (NSString *)windowNibName  {
     return NSStringFromClass([self class]);
 }
-
-#pragma mark - KVO methods
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-	[_contactDetailViewController setContact:[_contactListViewController selectedContact]];
-}
-
-#pragma mark - Action methods
-
-- (IBAction)newContact:(id)sender
-{
-    Contact *newContact = [_contactDataController createContact];
-	[_contactListViewController reloadData];
-	[_contactListViewController selectContact:newContact];
-}
-
-- (IBAction)deleteContact:(id)sender
-{
-    Contact *contact = [_contactListViewController selectedContact];
-    if (contact) {
-        [_contactDataController deleteContact:contact];
-    }
-	[_contactListViewController reloadData];
-}
-
 
 @end

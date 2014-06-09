@@ -50,10 +50,10 @@
     XCTAssertNoThrow([[ContactDetailViewModel alloc] initWithContact:_contact], @"");
 }
 
-- (void)testWhenInitiallizedShouldThrow
-{
-    XCTAssertThrows([[ContactDetailViewModel alloc] init], @"");
-}
+//- (void)testWhenInitiallizedShouldThrow
+//{
+//    XCTAssertThrows([[ContactDetailViewModel alloc] init], @"");
+//}
 
 - (void)testWhenInitializedShouldSetFirstName
 {
