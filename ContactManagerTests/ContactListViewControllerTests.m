@@ -1,30 +1,36 @@
-//
-//  ContactListViewControllerTests.m
-//  ContactManager
-//
-//  Created by Scott Densmore on 6/26/11.
-//  Copyright 2011 Scott Densmore. All rights reserved.
-//
-
 #import "BaseTestCase.h"
 #import <OCMock/OCMock.h>
 
 #import "ContactDataController.h"
 #import "ContactListViewController.h"
 #import "MainWindowController.h"
+#import "ContactManagerViewModel.h"
+
+@interface MainWindowController (Tests)
+
+@property(nonatomic, strong) ContactListViewController *contactListViewController;
+
+@end
+
+@interface ContactListViewController (Tests)
+
+@property(nonatomic, assign) IBOutlet NSArrayController *contactsArrayController;
+
+@property(nonatomic, assign) IBOutlet NSTableView *tableView;
+
+@end
 
 @interface ContactListViewControllerTests : BaseTestCase
 
-@property (nonatomic, strong) MainWindowController *mainWindowController;
-@property (nonatomic, assign) NSWindow *window;
-@property (nonatomic, assign) ContactListViewController *contactListViewController;
+@property(nonatomic, strong) MainWindowController *mainWindowController;
+@property(nonatomic, assign) NSWindow *window;
+@property(nonatomic, assign) ContactListViewController *contactListViewController;
 
 @end
 
 @implementation ContactListViewControllerTests
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
     /*
     CoreDataController *coreDataController = [[[CoreDataController alloc] initWithInitialType:NSInMemoryStoreType appSupportName:nil modelName:@"ContactManagerModel.momd" dataStoreName:nil] autorelease];
@@ -41,65 +47,60 @@
         //[contactsToReturn addObject:contact];
 	}
     */
-    
+
     id contactDataController = [OCMockObject mockForClass:ContactDataController.class];
     [[[contactDataController stub] andReturn:nil] contacts];
-    
-    _mainWindowController = [[MainWindowController alloc] initWithContactDataController:contactDataController];
-    _window = _mainWindowController.window;
-    _contactListViewController = _mainWindowController.contactListViewController;
+
+    ContactManagerViewModel *viewModel = [[ContactManagerViewModel alloc] initWithContactDataController:contactDataController];
+    self.mainWindowController = [[MainWindowController alloc] initWithContactManagerViewModel:viewModel];
+    self.window = _mainWindowController.window;
+    self.contactListViewController = self.mainWindowController.contactListViewController;
 }
 
-- (void)tearDown
-{
-    _mainWindowController = nil;
-    _window = nil;
-    _contactListViewController = nil;
-    
+- (void)tearDown {
+    self.mainWindowController = nil;
+    self.window = nil;
+    self.contactListViewController = nil;
+
     [super tearDown];
 }
 
-- (void)testShouldHaveValidNibName
-{
-    XCTAssertEqualObjects(_contactListViewController.nibName, @"ContactListViewController",
-                         @"The nib for this view should be ContactListViewController.xib");
+- (void)testShouldHaveValidNibName {
+    XCTAssertEqualObjects(self.contactListViewController.nibName, @"ContactListViewController",
+                    @"The nib for this view should be ContactListViewController.xib");
 }
 
-- (void)testShouldBeTableViewDelegate
-{
-    XCTAssertTrue([self checkOutlet:[_contactListViewController.tableView delegate]
-                        connectsTo:_contactListViewController],
-                 @"The table view's delegate should be the view controller.");
+- (void)testShouldBeTableViewDelegate {
+    XCTAssertTrue([self checkOutlet:[self.contactListViewController.tableView delegate]
+                         connectsTo:self.contactListViewController],
+                    @"The table view's delegate should be the view controller.");
 }
 
-- (void)testShouldBindContactsToArrayControllerContent
-{
-    NSArrayController *contactsArrayController = _contactListViewController.contactsArrayController;
-    
-    XCTAssertTrue([self checkObject:contactsArrayController hasBinding:NSContentArrayBinding 
-                          toObject:_contactListViewController through:@"contacts"],
-                 @"Bind contacts array controller content value to the controller's 'contacts' key path.");
+- (void)testShouldBindContactsToArrayControllerContent {
+    NSArrayController *contactsArrayController = self.contactListViewController.contactsArrayController;
+
+    XCTAssertTrue([self checkObject:contactsArrayController hasBinding:NSContentArrayBinding
+                           toObject:self.contactListViewController through:@"contacts"],
+                    @"Bind contacts array controller content value to the controller's 'contacts' key path.");
 }
 
 
-- (void)testShouldBindSelectedObjectFromArrayControllerToFirstNameColumn
-{
-    NSArrayController *contactsArrayController = _contactListViewController.contactsArrayController;
-    NSTableColumn *firstNameColumn = [_contactListViewController.tableView tableColumnWithIdentifier:@"First"];
-    
+- (void)testShouldBindSelectedObjectFromArrayControllerToFirstNameColumn {
+    NSArrayController *contactsArrayController = self.contactListViewController.contactsArrayController;
+    NSTableColumn *firstNameColumn = [self.contactListViewController.tableView tableColumnWithIdentifier:@"First"];
+
     XCTAssertTrue([self checkObject:firstNameColumn hasBinding:NSValueBinding
-                          toObject:contactsArrayController through:@"arrangedObjects.firstName"],
-                 @"Bind first name column value to the contacts array controller's 'arrangedObjects.firstName' key path.");
+                           toObject:contactsArrayController through:@"arrangedObjects.firstName"],
+                    @"Bind first name column value to the contacts array controller's 'arrangedObjects.firstName' key path.");
 }
 
-- (void)testShouldBindSelectedObjectFromArrayControllerToLastNameColumn
-{
-    NSArrayController *contactsArrayController = _contactListViewController.contactsArrayController;
-    NSTableColumn *lastNameColumn = [_contactListViewController.tableView tableColumnWithIdentifier:@"Last"];
-    
+- (void)testShouldBindSelectedObjectFromArrayControllerToLastNameColumn {
+    NSArrayController *contactsArrayController = self.contactListViewController.contactsArrayController;
+    NSTableColumn *lastNameColumn = [self.contactListViewController.tableView tableColumnWithIdentifier:@"Last"];
+
     XCTAssertTrue([self checkObject:lastNameColumn hasBinding:NSValueBinding
-                          toObject:contactsArrayController through:@"arrangedObjects.lastName"],
-                 @"Bind last name column value to the contacts array controller's 'arrangedObjects.lastName' key path.");
+                           toObject:contactsArrayController through:@"arrangedObjects.lastName"],
+                    @"Bind last name column value to the contacts array controller's 'arrangedObjects.lastName' key path.");
 }
 
 @end

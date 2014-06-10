@@ -1,11 +1,3 @@
-//
-//  ContactDataController.h
-//  ContactManager
-//
-//  Created by Scott Densmore on 6/21/11.
-//  Copyright 2011 Scott Densmore. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
 @class Contact;
@@ -13,11 +5,12 @@
 
 @interface ContactDataController : NSObject
 
-@property (nonatomic, readonly, strong) NSArray *contacts;
+@property(nonatomic, readonly, strong) NSArray *contacts;
 
 - (instancetype)initWithCoreDataController:(CoreDataController *)coreDataController;
 
 - (Contact *)createContact;
+
 - (void)deleteContact:(Contact *)contact;
 
 @end

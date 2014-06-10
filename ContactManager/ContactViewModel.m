@@ -1,21 +1,13 @@
-//
-//  ContactViewModel.m
-//  ContactManager
-//
-//  Created by Scott Densmore on 6/1/14.
-//  Copyright (c) 2014 Scott Densmore. All rights reserved.
-//
-
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "ContactViewModel.h"
 
 #import "Contact.h"
 
-@interface ContactViewModel()
+@interface ContactViewModel ()
 
-@property (nonatomic, strong) Contact *contact;
-@property (nonatomic, strong, readwrite) NSString *fullName;
+@property(nonatomic, strong) Contact *contact;
+@property(nonatomic, strong, readwrite) NSString *fullName;
 
 @end
 
@@ -27,7 +19,7 @@
 
 - (instancetype)initWithContact:(Contact *)contact {
     //NSParameterAssert(contact != nil);
-    
+
     self = [super init];
     if (self && contact != nil) {
         self.contact = contact;
@@ -38,7 +30,7 @@
         RAC(self, fullName) = [RACSignal combineLatest:@[RACObserve(self.contact, firstName), RACObserve(self.contact, lastName)] reduce:^id(NSString *firstName, NSString *lastName){
             return [NSString stringWithFormat:@"%@ %@", firstName, lastName];
         }];
-        
+
     }
     return self;
 }

@@ -1,11 +1,3 @@
-//
-//  ContactListViewController.m
-//  ContactManager
-//
-//  Created by Scott Densmore on 6/14/11.
-//  Copyright 2011 Scott Densmore. All rights reserved.
-//
-
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <ReactiveCocoa/RACEXTScope.h>
 
@@ -13,16 +5,12 @@
 
 #import "ContactManagerViewModel.h"
 
-#import "ContactDataController.h"
+@interface ContactListViewController ()
 
-#import "Contact.h"
+@property(nonatomic, assign) IBOutlet NSArrayController *contactsArrayController;
+@property(nonatomic, assign) IBOutlet NSTableView *tableView;
 
-@interface ContactListViewController()
-
-@property (nonatomic, assign) IBOutlet NSArrayController *contactsArrayController;
-@property (nonatomic, assign) IBOutlet NSTableView *tableView;
-
-@property (nonatomic, weak) ContactManagerViewModel *viewModel;
+@property(nonatomic, weak) ContactManagerViewModel *viewModel;
 
 @end
 
@@ -36,7 +24,7 @@
 
 - (instancetype)initWithContactManagerViewModel:(ContactManagerViewModel *)viewModel {
     NSParameterAssert(viewModel != nil);
-    
+
     self = [super init];
     if (self) {
         self.viewModel = viewModel;
@@ -45,7 +33,7 @@
 }
 
 
-#pragma mark - Accessors
+#pragma mark - Accessor
 
 - (NSArray *)contacts {
     return self.viewModel.contacts;
@@ -58,13 +46,12 @@
     if (self.contactsArrayController.selectedObjects.count) {
         [self.viewModel selectContactViewModelForIndex:self.contactsArrayController.selectionIndex];
     }
-    
+
     @weakify(self);
     [self.viewModel.updatedContentSignal subscribeNext:^(id x) {
         @strongify(self);
         [self willChangeValueForKey:@"contacts"];
         [self didChangeValueForKey:@"contacts"];
-        //[self.viewModel selectContactViewModelForIndex:self.contactsArrayController.selectionIndex];
     }];
 }
 
@@ -74,7 +61,7 @@
 
 #pragma mark - NSTableViewDelegate methods
 
-- (void)tableViewSelectionDidChange:(NSNotification *)aNotification  {
+- (void)tableViewSelectionDidChange:(NSNotification *)aNotification {
     [self.viewModel selectContactViewModelForIndex:self.contactsArrayController.selectionIndex];
 }
 

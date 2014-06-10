@@ -10,7 +10,9 @@ end
 
 target :ContactManagerTests, :exclusive => true do
 	pod 'OCMock', '>= 2.2.4'
-	
+  #pod 'Expecta', '~> 0.2.3'
+  #pod 'Specta', '~> 0.2.1'
+
 	inhibit_all_warnings!
 end
 

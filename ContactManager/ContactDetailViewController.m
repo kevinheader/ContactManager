@@ -1,11 +1,3 @@
-//
-//  ContactDetailViewController.m
-//  ContactManager
-//
-//  Created by Scott Densmore on 6/20/11.
-//  Copyright 2011 Scott Densmore. All rights reserved.
-//
-
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <ReactiveCocoa/RACEXTScope.h>
 
@@ -14,15 +6,15 @@
 #import "ContactManagerViewModel.h"
 #import "ContactViewModel.h"
 
-@interface ContactDetailViewController()
+@interface ContactDetailViewController ()
 
-@property (nonatomic, assign) IBOutlet NSTextField *firstNameTextField;
-@property (nonatomic, assign) IBOutlet NSTextField *lastNameTextField;
-@property (nonatomic, assign) IBOutlet NSTextField *emailTextField;
-@property (nonatomic, assign) IBOutlet NSTextField *phoneNumberTextField;
-@property (nonatomic, assign) IBOutlet NSObjectController *contactObjectController;
+@property(nonatomic, assign) IBOutlet NSTextField *firstNameTextField;
+@property(nonatomic, assign) IBOutlet NSTextField *lastNameTextField;
+@property(nonatomic, assign) IBOutlet NSTextField *emailTextField;
+@property(nonatomic, assign) IBOutlet NSTextField *phoneNumberTextField;
+@property(nonatomic, assign) IBOutlet NSObjectController *contactObjectController;
 
-@property (nonatomic, weak) ContactManagerViewModel *viewModel;
+@property(nonatomic, weak) ContactManagerViewModel *viewModel;
 
 @end
 
@@ -34,7 +26,7 @@
 
 - (instancetype)initWithContactManagerViewModel:(ContactManagerViewModel *)viewModel {
     NSParameterAssert(viewModel != nil);
-    
+
     self = [super init];
     if (self) {
         self.viewModel = viewModel;

@@ -1,11 +1,3 @@
-//
-//  ContactDataControllerKVOTests.m
-//  ContactManager
-//
-//  Created by Scott Densmore on 6/26/11.
-//  Copyright 2011 Scott Densmore. All rights reserved.
-//
-
 #import <XCTest/XCTest.h>
 
 #import "CoreDataController.h"
@@ -14,55 +6,50 @@
 
 @interface ContactDataControllerKVOTests : XCTestCase
 
-@property (nonatomic, strong) CoreDataController *coreDataController;
-@property (nonatomic, strong) ContactDataController *contactDataController;
-@property (nonatomic, assign) BOOL contactsChanged;
+@property(nonatomic, strong) CoreDataController *coreDataController;
+@property(nonatomic, strong) ContactDataController *contactDataController;
+@property(nonatomic, assign) BOOL contactsChanged;
 
 @end
 
 @implementation ContactDataControllerKVOTests
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
-    
-    _coreDataController = [[CoreDataController alloc] initWithInitialType:NSInMemoryStoreType modelName:@"ContactManagerModel.momd" applicationSupportName:nil dataStoreName:nil];
-    _contactDataController = [[ContactDataController alloc] initWithCoreDataController:_coreDataController];
-    [_contactDataController addObserver:self forKeyPath:@"contacts" options:NSKeyValueObservingOptionNew context:NULL];
-    
-    _contactsChanged = NO;
+
+    self.coreDataController = [[CoreDataController alloc] initWithInitialType:NSInMemoryStoreType modelName:@"ContactManagerModel.momd" applicationSupportName:nil dataStoreName:nil];
+    self.contactDataController = [[ContactDataController alloc] initWithCoreDataController:self.coreDataController];
+    [self.contactDataController addObserver:self forKeyPath:@"contacts" options:NSKeyValueObservingOptionNew context:NULL];
+
+    self.contactsChanged = NO;
 }
 
-- (void)tearDown
-{
-    [_contactDataController removeObserver:self forKeyPath:@"contacts"];
-    _contactDataController = nil;
-    
-    _coreDataController = nil;
-    
+- (void)tearDown {
+    [self.contactDataController removeObserver:self forKeyPath:@"contacts"];
+    self.contactDataController = nil;
+
+    self.coreDataController = nil;
+
     [super tearDown];
 }
 
-- (void)testShouldFireChangeForContactsWhenAddingNewContact
-{
-    [_contactDataController createContact];
-    
-    XCTAssertTrue(_contactsChanged, @"Adding new contact should fire change for contacts");
+- (void)testShouldFireChangeForContactsWhenAddingNewContact {
+    [self.contactDataController createContact];
+
+    XCTAssertTrue(self.contactsChanged, @"Adding new contact should fire change for contacts");
 }
 
-- (void)testShouldFireChangeForContactsWhenDeletingContact
-{
-    Contact *contact = [_contactDataController createContact];
-    _contactsChanged = NO;
-    
-    [_contactDataController deleteContact:contact];
-    
-    XCTAssertTrue(_contactsChanged, @"Adding new contact should fire change for contacts");
+- (void)testShouldFireChangeForContactsWhenDeletingContact {
+    Contact *contact = [self.contactDataController createContact];
+    self.contactsChanged = NO;
+
+    [self.contactDataController deleteContact:contact];
+
+    XCTAssertTrue(self.contactsChanged, @"Adding new contact should fire change for contacts");
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-	_contactsChanged = YES;
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    self.contactsChanged = YES;
 }
 
 @end
