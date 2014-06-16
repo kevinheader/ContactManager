@@ -1,5 +1,5 @@
 #import <XCTest/XCTest.h>
-#import <ReactiveCocoa/ReactiveCocoa/RACSignal.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "ContactManagerViewModel.h"
 
@@ -13,13 +13,13 @@
 
 - (RACSignal *)enableDeleteSignal;
 
-
 @end
 
 @interface ContactMangerViewModelTests : XCTestCase
 
 @property(nonatomic, strong) ContactManagerViewModel *viewModel;
 @property(nonatomic, strong) ContactDataController *contactDataController;
+@property(nonatomic, strong) CoreDataController *coreDataController;
 
 @end
 
@@ -28,8 +28,8 @@
 - (void)setUp {
     [super setUp];
 
-    CoreDataController *coreDataController = [[CoreDataController alloc] initWithInitialType:NSInMemoryStoreType modelName:@"ContactManagerModel.momd" applicationSupportName:nil dataStoreName:nil];
-    self.contactDataController = [[ContactDataController alloc] initWithCoreDataController:coreDataController];
+    self.coreDataController = [[CoreDataController alloc] initWithInitialType:NSInMemoryStoreType modelName:@"ContactManagerModel.momd" applicationSupportName:nil dataStoreName:nil];
+    self.contactDataController = [[ContactDataController alloc] initWithCoreDataController:self.coreDataController];
     self.viewModel = [[ContactManagerViewModel alloc] initWithContactDataController:self.contactDataController];
 }
 
@@ -41,11 +41,17 @@
 }
 
 - (void)testShouldCreatesNewContactWhenAddCommandExecuted {
-    // TODO: How do you test async?
+    [[self.viewModel.addContactCommand execute:nil] asynchronouslyWaitUntilCompleted:NULL];
+    
+    XCTAssertEqual(self.viewModel.contacts.count, 1, @"");
 }
 
 - (void)testShouldRemoveSelectedContactWhenRemoveCommandExecuted {
-    // TODO: How do you test async?
+    [self.contactDataController createContact];
+    [self.viewModel selectContactViewModelForIndex:0];
+    [[self.viewModel.deleteContactCommand execute:nil] asynchronouslyWaitUntilCompleted:NULL];
+    
+    XCTAssertEqual(self.viewModel.contacts.count, 0, @"");
 }
 
 - (void)testShouldDisableDeleteCommandWhenNoContactIsSelected {
@@ -81,6 +87,5 @@
     XCTAssertEqualObjects(model, self.viewModel.selectedContact, @"");
 }
 
-
-
 @end
+

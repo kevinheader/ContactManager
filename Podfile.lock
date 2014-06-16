@@ -36,11 +36,12 @@ PODS:
   - libextobjc/UmbrellaHeader (0.4)
   - OCMock (2.2.4)
   - ReactiveCocoa (2.3):
-    - ReactiveCocoa/Core
-    - ReactiveCocoa/no-arc
+    - ReactiveCocoa/UI
   - ReactiveCocoa/Core (2.3):
     - ReactiveCocoa/no-arc
   - ReactiveCocoa/no-arc (2.3)
+  - ReactiveCocoa/UI (2.3):
+    - ReactiveCocoa/Core
   - ReactiveViewModel (0.2):
     - ReactiveCocoa (~> 2.1)
 
@@ -51,9 +52,9 @@ DEPENDENCIES:
   - ReactiveViewModel (>= 0.2)
 
 SPEC CHECKSUMS:
-  libextobjc: 2c9fc8226f0f38e562587f65172f93f0c9b4a47a
-  OCMock: 5008fae4b4789b8fc3e48cd7660f2eb5ef8ce89e
-  ReactiveCocoa: 1f6265f9d521923d3efcc37b00722cefc16df269
-  ReactiveViewModel: f636ab3e06b5e69664b69c883fcdb457ab5cb0cb
+  libextobjc: ba42e4111f433273a886cd54f0ddaddb7f62f82f
+  OCMock: 6db79185520e24f9f299548f2b8b07e41d881bd5
+  ReactiveCocoa: 2066583826c17dde8e90c41e489f682048cc57c9
+  ReactiveViewModel: 78387196df2e7535bb2776c41df15dbb17300f8a
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.33.1
